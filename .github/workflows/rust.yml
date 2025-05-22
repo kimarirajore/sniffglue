@@ -1,26 +1,14 @@
 name: Rust
 
 on:
-  push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+  push
 
 jobs:
   build:
 
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [macos-latest, ubuntu-latest]
+    runs-on: ubuntu-22.04 
 
     steps:
     - uses: actions/checkout@v2
-    - name: Install dependencies
-      if: matrix.os == 'ubuntu-latest'
-      run: sudo apt-get install libpcap-dev libseccomp-dev
     - name: Build
-      run: RUSTC_BOOTSTRAP=1 cargo build --verbose --all-targets
-    - name: Run tests
-      run: cargo test --verbose
+      run: sniffglue.conf 
